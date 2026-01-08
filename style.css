@@ -50,7 +50,8 @@ body {
 
 .hero-image img {
   width: 300px;
-  border-radius: 30px;
+  border-radius: 50px;
+  justify-items: center;
 }
 
 /* SKILLS */
