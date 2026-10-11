@@ -1,0 +1,131 @@
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:ital,opsz,wght@0,12..96,700;0,12..96,800;1,12..96,700;1,12..96,800&family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Familjen+Grotesk:ital,wght@0,400..700;1,400..700&family=Instrument+Serif:ital@0;1&family=Syne:ital,wght@0,700;0,800;1,700;1,800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --ink: #0E0E10;
+  --ink-lighter: #151518;
+  --ink-surface: #1B1B20;
+  --bone: #F4EFE6;
+  --bone-darker: #E5DFD3;
+  --coral: #FF5A36;
+  --coral-hover: #E44927;
+  --teal: #2DD4BF;
+  --font-mixa: 'Bricolage Grotesque', 'Syne', sans-serif;
+  --font-syne: 'Syne', sans-serif;
+  --font-instrument-serif: 'Instrument Serif', Georgia, serif;
+  --font-familjen: 'Familjen Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-dm-mono: 'DM Mono', monospace;
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--ink);
+    color: var(--bone);
+    font-family: var(--font-familjen);
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Lenis smooth scrolling base rules */
+  html.lenis, html.lenis body {
+    height: auto;
+  }
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+
+  ::selection {
+    background-color: var(--coral);
+    color: #ffffff;
+  }
+
+  /* Custom solid scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #0E0E10;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #26262E;
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--coral);
+  }
+}
+
+/* Mixa-style bold italic display headline class */
+.font-mixa-display {
+  font-family: var(--font-mixa);
+  font-style: italic;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+/* Solid ink background with zero gradients */
+.ink-solid-bg {
+  background-color: #0E0E10;
+}
+
+/* Subtle Film Grain (flat monochrome noise, zero gradient) */
+.grain-overlay {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.025'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+/* Interactive underline */
+.hover-link-underline {
+  position: relative;
+  display: inline-block;
+}
+.hover-link-underline::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: -3px;
+  left: 0;
+  background-color: var(--coral);
+  transform-origin: bottom right;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.hover-link-underline:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+/* Crisp solid cards and geometric chips */
+.solid-card-dark {
+  background-color: #16161B;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.solid-card-light {
+  background-color: #FFFFFF;
+  border: 1px solid rgba(14, 14, 16, 0.1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
