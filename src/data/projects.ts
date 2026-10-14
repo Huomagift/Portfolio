@@ -7,10 +7,10 @@ export const projects: Project[] = [
     slug: "rights-compass",
     title: "Rights Compass",
     featured: true,
-    oneLiner: "A legal-rights literacy app helping ordinary Nigerians understand their rights, query an AI tutor, and connect with verified lawyers.",
+    oneLiner: "Your Legal Bible: A legal-rights literacy app helping ordinary Nigerians understand their rights, query an AI tutor, and connect with verified lawyers.",
     problem: "Most ordinary Nigerians face severe barriers accessing clear legal knowledge, cannot afford rapid legal consultation, and lack trusted means to verify legitimate legal practitioners.",
     whatIBuilt: "A digital legal literacy platform featuring bundled constitutional rights, offline capabilities, an AI tutor chat powered by live voice failover, and an escrow-protected marketplace for verified lawyers.",
-    role: "Lead Developer & Product Architect",
+    role: "Developer & Product Architect",
     stack: [
       "React Native",
       "Supabase",

@@ -68,7 +68,7 @@ export default function Hero() {
                 className="group inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 hover:border-coral/50 hover:bg-white/10 transition-colors text-xs font-mono"
               >
                 <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-coral opacity-75" />
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-coral opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-coral" />
                 </span>
                 <span className="text-bone/90 group-hover:text-coral transition-colors tracking-wide text-[11px] sm:text-xs">
