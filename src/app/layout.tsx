@@ -4,15 +4,15 @@ import SmoothScroll from '@/components/motion/SmoothScroll';
 import CustomCursor from '@/components/motion/CustomCursor';
 
 export const metadata: Metadata = {
-  title: 'Gift Amadi (huomagift) — AI Product Developer | Software developer',
-  description: 'I build products that solve problems, and I ship them. Portfolio of Gift Amadi (huomagift) featuring Rights Compass, Harvest Rescue AI, StuffSwap, and more.',
-  keywords: ['Gift', 'huomagift', 'Software Developer Nigeria', 'AI Products Nigeria', 'Next.js', 'React Native', 'Rights Compass', 'Harvest Rescue AI'],
+  title: 'Gift Amadi (huomagift) — Electrical/Electronics Engineer |AI Product Developer | Software developer',
+  description: 'I build products that solve problems. Portfolio of Gift Amadi (huomagift) featuring Rights Compass, Harvest Rescue, StuffSwap, and more.',
+  keywords: ['Gift Amadi', 'huomagift', 'Software Developer Nigeria', 'AI Products Nigeria', 'Next.js', 'React Native', 'Rights Compass', 'Harvest Rescue'],
   authors: [{ name: 'Gift (huomagift)', url: 'https://linkedin.com/in/huomagift' }],
-  metadataBase: new URL('https://huomagift.github.io/Portfolio/'),
+  metadataBase: new URL('https://huomagift.vercel.app/'),
   openGraph: {
     title: 'Gift Amadi (huomagift) — Products That Solve Problems',
-    description: 'Software developer and Product developer building AI-powered MVPs for Nigeria and Africa.',
-    url: 'https://huomagift.github.io/Portfolio/',
+    description: 'Software developer and Product developer building scalable and sustainable solutions.',
+    url: 'https://huomagift.vercel.app/',
     siteName: 'Gift Portfolio',
     locale: 'en_NG',
     type: 'website',
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Gift (huomagift) — AI Product Developer',
-    description: 'I build products that solve problems, and I ship them.',
+    description: 'I build products that solve problems',
   },
 };
 

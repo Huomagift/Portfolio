@@ -1,13 +1,13 @@
 import { SocialLink, Milestone } from '@/types';
 
 export const profile = {
-  name: "Gift",
+  name: "Gift Amadi",
   handle: "huomagift",
   email: "huomagift@gmail.com",
   location: "Nigeria",
   role: "Software Developer",
   status: "Currently building: Rights Compass",
-  tagline: "I build products that solve problems, and I ship them.",
+  tagline: "I build products that solve problems.",
   
   bio: [
     "I'm a software developer and entrepreneur based in Nigeria.",

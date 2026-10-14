@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
 import { profile } from '@/data/profile';
 import { ArrowDownRight, Send, Mail, Check, Sparkles } from 'lucide-react';
@@ -55,20 +56,25 @@ export default function Hero() {
           {/* Left Column: Typography & CTAs (7 cols) */}
           <div className="lg:col-span-7 flex flex-col items-start">
             
-            {/* Status Chip */}
+            {/* Status Chip linking directly to Rights Compass */}
             <motion.div
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4 }}
-              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-mono mb-6"
+              className="mb-6"
             >
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-coral opacity-75" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-coral" />
-              </span>
-              <span className="text-bone/90 tracking-wide text-[11px] sm:text-xs">
-                {profile.status}
-              </span>
+              <Link
+                href="/projects/rights-compass"
+                className="group inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 hover:border-coral/50 hover:bg-white/10 transition-colors text-xs font-mono"
+              >
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-coral opacity-75" />
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-coral" />
+                </span>
+                <span className="text-bone/90 group-hover:text-coral transition-colors tracking-wide text-[11px] sm:text-xs">
+                  {profile.status}
+                </span>
+              </Link>
             </motion.div>
 
             {/* Small Greeting */}
@@ -90,7 +96,7 @@ export default function Hero() {
               transition={{ duration: 0.5, delay: 0.15 }}
               className="font-display font-black text-3xl xs:text-4xl sm:text-6xl md:text-7xl lg:text-7xl xl:text-8xl tracking-tight leading-[0.96] text-bone uppercase mb-7"
             >
-              I BUILD PRODUCTS THAT SOLVE PROBLEMS, AND I DEPLOY THEM.
+              I BUILD PRODUCTS THAT SOLVE PROBLEMS.
             </motion.h1>
 
             {/* Short Declarative Bio */}
