@@ -41,26 +41,24 @@ export const projects: Project[] = [
     oneLiner: "An agritech hackathon MVP that watches weather and satellite vegetation data (NDVI) to predict crop threats 1–2 weeks ahead.",
     problem: "Nigerian farmers frequently lose crops to unpredicted adverse weather shifts and vegetation health declines that go unnoticed until destruction has already occurred.",
     whatIBuilt: "A mobile-first web app where farmers map farm plots and coordinates to receive real-time risk predictions and conversational guidance via Swift Agent.",
-    role: "Frontend Developer (built the frontend)",
+    role: "Developer",
     stack: [
       "FastAPI",
       "Supabase",
-      "Next.js",
-      "Material 3"
+      "Next.js"
     ],
     keyDecisions: [
-      "Mobile-first frontend design engineered with Material 3 guidelines to ensure readability in direct sunlight on low-spec smartphones.",
+      "Mobile-first frontend design engineered with Material 3 guidelines.",
       "Telemetry pipeline that marries weather forecasts with satellite NDVI (Normalized Difference Vegetation Index) data to forecast crop threats 1–2 weeks before visual damage.",
-      "Conversational support agent named 'Swift Agent' that translates technical telemetry metrics into simple, concrete actions farmers can take immediately."
+      "Conversational support agent integration (Swift Agent) that translates technical telemetry metrics into simple, concrete actions farmers can take immediately."
     ],
     status: "Hackathon MVP",
     badges: ["Agritech", "Hackathon MVP"],
     links: [
-      { type: "Live", url: null, label: "Live Demo" },
-      { type: "GitHub", url: null, label: "GitHub" },
-      { type: "Pitch", url: null, label: "Demo / Video" }
+      { type: "Live", url: "https://harvest-rescue.vercel.app/", label: "Live Demo" },
+      { type: "GitHub", url: "https://github.com/Huomagift/harvest-rescue", label: "GitHub" }
     ],
-    image: "/projects/harvest-rescue.svg",
+    image: "/projects/harvest-rescue.jpg",
     imageAlt: "Harvest Rescue AI satellite NDVI crop health dashboard"
   },
   {
@@ -80,11 +78,9 @@ export const projects: Project[] = [
     badges: ["CS Girlies Hackathon 2025 · 9th Place"],
     achievement: "CS Girlies Hackathon 2025 — Top 10 (9th place)",
     links: [
-      { type: "Live", url: null, label: "Live Demo" },
-      { type: "GitHub", url: null, label: "GitHub" },
-      { type: "Pitch", url: null, label: "Demo / Video" }
-    ],
-    image: "/projects/stuffswap.svg",
+      { type: "GitHub", url: "https://github.com/Huomagift/StuffSwap", label: "GitHub" },
+     ],
+    image: "/projects/stuffswap.png",
     imageAlt: "StuffSwap AI matching interface for item exchanges"
   },
   {
@@ -103,10 +99,8 @@ export const projects: Project[] = [
     badges: ["2024 3MTT Hackathon Rivers State · Top 5"],
     achievement: "2024 3MTT Hackathon Rivers State — Top 5",
     links: [
-      { type: "Live", url: null, label: "Live Demo" },
-      { type: "GitHub", url: null, label: "GitHub" },
-      { type: "Pitch", url: null, label: "Demo / Video" }
-    ],
+      { type: "GitHub", url: "https://github.com/Huomagift/bio-attendance-frontend", label: "GitHub" },
+      ],
     image: "/projects/trackdem.svg",
     imageAlt: "Trackdem school attendance management workflow"
   },
@@ -115,37 +109,17 @@ export const projects: Project[] = [
     number: "05",
     slug: "artza",
     title: "Artza",
-    oneLiner: "An e-commerce website built for a friend's brand, showcasing custom gift boxes, portraits, and personalized merchandise.",
+    oneLiner: "An e-commerce website built for a brand, showcasing custom gift boxes, portraits, and personalized merchandise.",
     problem: "A creative bespoke gifting business needed an elegant, credible digital storefront to showcase custom curated packages and convert visitors into buyers.",
     whatIBuilt: "A tailored digital catalog and brand experience with optimized product photography displays and direct order routing.",
     status: "Shipped & Live",
     badges: ["Live Client Site"],
     links: [
       { type: "Live", url: "https://www.artzaworld.com", label: "artzaworld.com" },
-      { type: "GitHub", url: null, label: "GitHub" },
-      { type: "Pitch", url: null, label: "Pitch / Video" }
-    ],
-    image: "/projects/artza.svg",
-    imageAlt: "Artza e-commerce storefront showcasing curated gift boxes"
-  },
-  {
-    id: "06",
-    number: "06",
-    slug: "task-manager",
-    title: "Task Manager",
-    oneLiner: "A focused task management application built and delivered as the capstone project for the 3 Million Technical Talent (3MTT) programme.",
-    problem: "Developers and students need a clutter-free system to organize daily execution priorities and maintain steady momentum.",
-    whatIBuilt: "A structured task management application with priority categorisation, status tracking, and straightforward daily planning workflows.",
-    status: "3MTT Capstone Complete",
-    badges: ["3MTT Capstone"],
-    achievement: "3MTT Programme Capstone",
-    links: [
-      { type: "Live", url: null, label: "Live Demo" },
-      { type: "GitHub", url: null, label: "GitHub" },
-      { type: "Pitch", url: null, label: "Demo / Video" }
-    ],
-    image: "/projects/task-manager.svg",
-    imageAlt: "Task Manager 3MTT capstone application"
+      { type: "GitHub", url: "https://github.com/Huomagift/artza", label: "GitHub" },
+      ],
+    image: "/projects/artza.jpg",
+    imageAlt: "Artza e-commerce storefront showcasing luxruy arts"
   }
 ];
 

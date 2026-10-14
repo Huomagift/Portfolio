@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:ital,opsz,wght@0,12..96,700;0,12..96,800;1,12..96,700;1,12..96,800&family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Familjen+Grotesk:ital,wght@0,400..700;1,400..700&family=Instrument+Serif:ital@0;1&family=Syne:ital,wght@0,700;0,800;1,700;1,800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -13,11 +13,7 @@
   --coral: #FF5A36;
   --coral-hover: #E44927;
   --teal: #2DD4BF;
-  --font-mixa: 'Bricolage Grotesque', 'Syne', sans-serif;
-  --font-syne: 'Syne', sans-serif;
-  --font-instrument-serif: 'Instrument Serif', Georgia, serif;
-  --font-familjen: 'Familjen Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-dm-mono: 'DM Mono', monospace;
+  --font-lato: 'Lato', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
 @layer base {
@@ -31,10 +27,14 @@
     scroll-behavior: smooth;
     background-color: var(--ink);
     color: var(--bone);
-    font-family: var(--font-familjen);
+    font-family: var(--font-lato);
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: var(--font-lato);
   }
 
   /* Lenis smooth scrolling base rules */
@@ -69,12 +69,10 @@
   }
 }
 
-/* Mixa-style bold italic display headline class */
-.font-mixa-display {
-  font-family: var(--font-mixa);
-  font-style: italic;
-  font-weight: 800;
-  letter-spacing: -0.03em;
+/* Professional Lato display styling */
+.font-display {
+  font-family: var(--font-lato);
+  letter-spacing: -0.02em;
 }
 
 /* Solid ink background with zero gradients */

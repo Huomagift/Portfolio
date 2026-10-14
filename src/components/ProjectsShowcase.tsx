@@ -21,15 +21,15 @@ export default function ProjectsShowcase() {
             <div className="flex items-center gap-2 mb-2">
               <span className="w-2 h-2 rounded-full bg-coral" />
               <p className="font-mono text-xs uppercase tracking-widest text-coral font-bold">
-                Portfolio Index • 01 — 06
+                Portfolio Index • 01 — 05
               </p>
             </div>
-            <h2 className="font-display italic font-extrabold text-3xl sm:text-5xl md:text-6xl text-bone uppercase tracking-tight">
-              Selected <span className="font-accent not-italic text-coral lowercase">Projects</span>
+            <h2 className="font-display font-black text-3xl sm:text-5xl md:text-6xl text-bone uppercase tracking-tight">
+              Selected <span className="text-coral">Projects</span>
             </h2>
           </div>
           <p className="font-body text-bone/70 text-sm sm:text-base max-w-md">
-            Real products built for Nigerian problems: legal access, farming resilience, classroom attendance, and cashless trade.
+            Real products built for real problems: legal access, farming resilience, classroom attendance, and trade.
           </p>
         </div>
 
@@ -44,19 +44,16 @@ export default function ProjectsShowcase() {
               <div className="lg:col-span-6 flex flex-col items-start">
                 
                 <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-4">
-                  <span className="font-mono text-2xl sm:text-4xl font-extrabold text-coral">
+                  <span className="font-mono text-2xl sm:text-4xl font-black text-coral">
                     {flagship.number}
                   </span>
-                  <span className="px-3 py-1 rounded-full text-xs font-mono bg-coral/15 text-coral border border-coral/30">
+                  <span className="px-3 py-1 rounded-full text-xs font-mono font-bold bg-coral/15 text-coral border border-coral/30">
                     Flagship • In Active Development
-                  </span>
-                  <span className="px-3 py-1 rounded-full text-xs font-mono bg-tealAccent/15 text-tealAccent border border-tealAccent/30">
-                    Offline-First
                   </span>
                 </div>
 
                 <Link href={`/projects/${flagship.slug}`}>
-                  <h3 className="font-display italic font-extrabold text-2xl sm:text-4xl lg:text-5xl text-bone uppercase tracking-tight hover:text-coral transition-colors mb-4 flex items-center gap-2">
+                  <h3 className="font-display font-black text-2xl sm:text-4xl lg:text-5xl text-bone uppercase tracking-tight hover:text-coral transition-colors mb-4 flex items-center gap-2">
                     <span>{flagship.title}</span>
                     <ArrowUpRight className="w-6 h-6 text-coral" />
                   </h3>
@@ -74,15 +71,11 @@ export default function ProjectsShowcase() {
                   </div>
                   <div className="flex items-start gap-2">
                     <span className="text-coral mt-0.5">•</span>
-                    <span>Floating 3D matte-clay owl mascot for interactive AI Tutor chat.</span>
-                  </div>
-                  <div className="flex items-start gap-2">
-                    <span className="text-coral mt-0.5">•</span>
                     <span>Lawyer marketplace protected by upfront escrow and manual NBA verification.</span>
                   </div>
                   <div className="flex items-start gap-2">
                     <span className="text-coral mt-0.5">•</span>
-                    <span>Node.js live voice failover when emergencies are flagged.</span>
+                    <span>Live voice failover when emergencies are flagged.</span>
                   </div>
                 </div>
 
@@ -92,7 +85,7 @@ export default function ProjectsShowcase() {
                     {flagship.stack.map((tech) => (
                       <span
                         key={tech}
-                        className="px-2.5 py-1 rounded-md text-xs font-mono bg-white/5 border border-white/10 text-bone/80"
+                        className="px-2.5 py-1 rounded-md text-xs font-mono font-medium bg-white/5 border border-white/10 text-bone/80"
                       >
                         {tech}
                       </span>
@@ -114,21 +107,21 @@ export default function ProjectsShowcase() {
                 </div>
               </div>
 
-              {/* Right Column: Visual Preview (6 cols) */}
+              {/* Right Column: Visual Preview (6 cols) - Fits Properly Edge-to-Edge */}
               <div className="lg:col-span-6 relative">
                 <Link
                   href={`/projects/${flagship.slug}`}
-                  className="block relative aspect-[16/10] rounded-2xl overflow-hidden border border-white/10 bg-ink"
+                  className="group/img block relative aspect-[16/10] sm:aspect-[16/9] w-full rounded-2xl overflow-hidden border border-white/15 bg-ink shadow-2xl"
                 >
                   <Image
                     src={flagship.image}
                     alt={flagship.imageAlt}
                     fill
-                    className="object-contain"
+                    className="object-cover object-top group-hover/img:scale-105 transition-transform duration-500"
                     sizes="(max-width: 1024px) 100vw, 600px"
                   />
                   
-                  <div className="absolute bottom-3 right-3 px-3 py-1 rounded-md bg-ink border border-white/15 text-[11px] font-mono text-bone/80 flex items-center gap-1.5">
+                  <div className="absolute bottom-3 right-3 px-3 py-1 rounded-md bg-ink/90 border border-white/15 text-[11px] font-mono text-bone/80 flex items-center gap-1.5 backdrop-blur-sm">
                     <Layers className="w-3.5 h-3.5 text-coral" />
                     <span>View Architecture</span>
                   </div>
@@ -140,9 +133,9 @@ export default function ProjectsShowcase() {
         </div>
 
         {/* ============================================================== */}
-        {/* PROJECTS 02 TO 06: FLAT SOLID ASYMMETRIC GRID */}
+        {/* PROJECTS 02 TO 05: FLAT SOLID ASYMMETRIC GRID */}
         {/* ============================================================== */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-6 sm:gap-8">
           {otherProjects.map((project) => (
             <motion.article
               key={project.id}
@@ -155,12 +148,12 @@ export default function ProjectsShowcase() {
               <div>
                 {/* Header Row: Number + Badge */}
                 <div className="flex items-center justify-between gap-3 mb-4">
-                  <span className="font-mono text-xl sm:text-2xl font-extrabold text-coral">
+                  <span className="font-mono text-xl sm:text-2xl font-black text-coral">
                     {project.number}
                   </span>
 
                   {project.achievement ? (
-                    <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-mono bg-coral/15 text-coral border border-coral/30">
+                    <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-mono font-bold bg-coral/15 text-coral border border-coral/30">
                       <Award className="w-3 h-3" />
                       <span>{project.achievement}</span>
                     </span>
@@ -171,28 +164,28 @@ export default function ProjectsShowcase() {
                   )}
                 </div>
 
-                {/* Project Image Preview Slot */}
+                {/* Project Image Preview Slot - Properly Fitted with object-cover object-top, zero awkward gaps */}
                 <Link
                   href={`/projects/${project.slug}`}
-                  className="block relative aspect-[16/10] rounded-xl overflow-hidden bg-ink border border-white/10 mb-4 hover:border-coral/40 transition-colors"
+                  className="group/img block relative aspect-[16/10] sm:aspect-[16/9] w-full rounded-xl overflow-hidden bg-ink border border-white/10 mb-4 hover:border-coral/40 transition-colors"
                 >
                   <Image
                     src={project.image}
                     alt={project.imageAlt}
                     fill
-                    className="object-contain p-2"
-                    sizes="(max-width: 768px) 100vw, 400px"
+                    className="object-cover object-top group-hover/img:scale-105 transition-transform duration-500"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 550px"
                   />
                   {project.slug === 'artza' && (
-                    <div className="absolute top-2 right-2 px-2 py-0.5 rounded text-[9px] font-mono bg-coral text-white font-bold">
+                    <div className="absolute top-2 right-2 px-2 py-0.5 rounded text-[9px] font-mono bg-coral text-white font-bold tracking-wider">
                       LIVE SITE
                     </div>
                   )}
                 </Link>
 
-                {/* Title in Mixa Font Style */}
+                {/* Title */}
                 <Link href={`/projects/${project.slug}`}>
-                  <h3 className="font-display italic font-extrabold text-xl sm:text-2xl text-bone uppercase tracking-tight hover:text-coral transition-colors mb-2 flex items-center justify-between">
+                  <h3 className="font-display font-black text-xl sm:text-2xl text-bone uppercase tracking-tight hover:text-coral transition-colors mb-2 flex items-center justify-between">
                     <span>{project.title}</span>
                     <ArrowUpRight className="w-4 h-4 text-coral" />
                   </h3>
@@ -203,7 +196,7 @@ export default function ProjectsShowcase() {
                   {project.oneLiner}
                 </p>
 
-                {/* Stack (Only where provided in brief!) */}
+                {/* Stack */}
                 {project.stack && project.stack.length > 0 && (
                   <div className="flex flex-wrap gap-1.5 mb-4">
                     {project.stack.map((tech) => (
@@ -223,7 +216,7 @@ export default function ProjectsShowcase() {
                 <div className="flex items-center justify-between">
                   <Link
                     href={`/projects/${project.slug}`}
-                    className="text-xs font-mono uppercase tracking-wider text-bone/90 hover:text-coral font-medium flex items-center gap-1 hover-link-underline"
+                    className="text-xs font-mono uppercase tracking-wider text-bone/90 hover:text-coral font-bold flex items-center gap-1 hover-link-underline"
                   >
                     <span>Details &amp; Decisions</span>
                     <ArrowUpRight className="w-3.5 h-3.5" />

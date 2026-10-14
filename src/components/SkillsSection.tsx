@@ -49,8 +49,8 @@ export default function SkillsSection() {
               Engineering Stack
             </p>
           </div>
-          <h2 className="font-display italic font-extrabold text-3xl sm:text-5xl md:text-6xl text-ink uppercase tracking-tight leading-[1.02]">
-            Tools I actually <span className="font-accent not-italic text-coral lowercase">ship</span> with.
+          <h2 className="font-display font-black text-3xl sm:text-5xl md:text-6xl text-ink uppercase tracking-tight leading-[1.02]">
+            Tools I actually <span className="text-coral">ship</span> with.
           </h2>
           <p className="font-body text-ink/75 text-sm sm:text-base md:text-lg mt-3 max-w-xl">
             Strictly what I use in active production and hackathons. No inflated lists of languages touched once.
@@ -70,7 +70,7 @@ export default function SkillsSection() {
                   <div className="p-2 rounded-xl bg-ink/5">
                     {getCategoryIcon(group.key)}
                   </div>
-                  <h3 className="font-display italic font-bold text-lg sm:text-xl text-ink uppercase tracking-tight">
+                  <h3 className="font-display font-bold text-lg sm:text-xl text-ink uppercase tracking-tight">
                     {group.title}
                   </h3>
                 </div>

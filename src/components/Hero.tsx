@@ -83,12 +83,12 @@ export default function Hero() {
               <span className="text-bone/60">huomagift</span>
             </motion.p>
 
-            {/* Massive Display Headline in Mixa Style (Heavy Italic Grotesque) */}
+            {/* Massive Display Headline in Lato Black */}
             <motion.h1
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.15 }}
-              className="font-display font-extrabold text-3xl xs:text-4xl sm:text-6xl md:text-7xl lg:text-7xl xl:text-8xl tracking-tight leading-[0.96] text-bone uppercase mb-7"
+              className="font-display font-black text-3xl xs:text-4xl sm:text-6xl md:text-7xl lg:text-7xl xl:text-8xl tracking-tight leading-[0.96] text-bone uppercase mb-7"
             >
               I BUILD PRODUCTS THAT SOLVE PROBLEMS, AND I DEPLOY THEM.
             </motion.h1>
@@ -135,15 +135,15 @@ export default function Hero() {
               className="mt-12 pt-6 border-t border-white/10 flex flex-wrap gap-6 sm:gap-10 text-xs font-mono text-bone/60"
             >
               <div>
-                <span className="block text-bone font-bold text-lg font-display italic">6+</span>
+                <span className="block text-bone font-black text-lg font-display">5+</span>
                 <span>Shipped &amp; Active Projects</span>
               </div>
               <div>
-                <span className="block text-coral font-bold text-lg font-display italic">Top 5</span>
+                <span className="block text-coral font-black text-lg font-display">Top 5</span>
                 <span>2024 3MTT Rivers State</span>
               </div>
               <div>
-                <span className="block text-tealAccent font-bold text-lg font-display italic">9th</span>
+                <span className="block text-tealAccent font-black text-lg font-display">9th</span>
                 <span>CS Girlies Hackathon 2025</span>
               </div>
             </motion.div>
@@ -164,7 +164,7 @@ export default function Hero() {
                   alt="Gift Amadi - Software Developer"
                   fill
                   priority
-                  className="object-cover object-center filter contrast-[1.05]"
+                  className="object-cover object-top filter contrast-[1.05]"
                   sizes="(max-width: 768px) 100vw, 380px"
                 />
 
@@ -172,7 +172,7 @@ export default function Hero() {
                 <div className="absolute bottom-3 left-3 right-3 p-3.5 rounded-xl bg-ink/90 border border-white/15 backdrop-blur-none">
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="font-display italic font-bold text-bone text-sm sm:text-base">
+                      <p className="font-display font-bold text-bone text-sm sm:text-base">
                         Gift Amadi (huomagift)
                       </p>
                       <p className="font-mono text-[11px] text-coral">Software Developer • Nigeria</p>

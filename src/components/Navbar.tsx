@@ -67,10 +67,10 @@ export default function Navbar() {
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-          {/* Wordmark with Mixa bold italic energy */}
+          {/* Wordmark in bold Lato */}
           <Link
             href="/"
-            className="group flex items-center gap-1.5 text-bone font-display italic font-extrabold text-2xl uppercase tracking-tight transition-transform active:scale-95"
+            className="group flex items-center gap-1.5 text-bone font-display font-black text-2xl uppercase tracking-tight transition-transform active:scale-95"
           >
             <span className="text-bone group-hover:text-coral transition-colors">Gift Amadi</span>
             <span className="w-2 h-2 rounded-full bg-coral" />
@@ -192,7 +192,7 @@ export default function Navbar() {
                   key={link.label}
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className="text-lg font-display italic font-bold text-bone hover:text-coral transition-colors py-1 border-b border-white/5"
+                  className="text-lg font-display font-bold text-bone hover:text-coral transition-colors py-1 border-b border-white/5"
                 >
                   {link.label}
                 </a>

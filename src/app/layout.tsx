@@ -35,11 +35,11 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
-          href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:ital,opsz,wght@0,12..96,700;0,12..96,800;1,12..96,700;1,12..96,800&family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Familjen+Grotesk:ital,wght@0,400..700;1,400..700&family=Instrument+Serif:ital@0;1&family=Syne:ital,wght@0,700;0,800;1,700;1,800&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
           rel="stylesheet"
         />
       </head>
-      <body className="bg-ink text-bone font-body min-h-screen relative antialiased selection:bg-coral selection:text-white">
+      <body className="bg-ink text-bone font-sans min-h-screen relative antialiased selection:bg-coral selection:text-white">
         <SmoothScroll>
           <CustomCursor />
           {/* Subtle noise grain texture over whole page */}

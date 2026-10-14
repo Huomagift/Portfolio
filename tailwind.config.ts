@@ -33,11 +33,11 @@ const config: Config = {
         },
       },
       fontFamily: {
-        mixa: ["'Bricolage Grotesque'", "'Syne'", "sans-serif"],
-        display: ["'Bricolage Grotesque'", "'Syne'", "sans-serif"],
-        accent: ["'Instrument Serif'", "Georgia", "serif"],
-        body: ["'Familjen Grotesk'", "sans-serif"],
-        mono: ["'DM Mono'", "monospace"],
+        sans: ["'Lato'", "sans-serif"],
+        body: ["'Lato'", "sans-serif"],
+        display: ["'Lato'", "sans-serif"],
+        accent: ["'Lato'", "sans-serif"],
+        mono: ["'Lato'", "monospace"],
       },
       animation: {
         "float-slow": "float 8s ease-in-out infinite",

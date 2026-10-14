@@ -25,8 +25,9 @@ export default function ContactFooter() {
     email: '',
     message: '',
   });
-  const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'activation_needed' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
+  const [submittedData, setSubmittedData] = useState({ name: '', email: '', message: '' });
 
   const recipientEmail =
     process.env.NEXT_PUBLIC_CONTACT_EMAIL ||
@@ -39,18 +40,35 @@ export default function ContactFooter() {
     setTimeout(() => setCopied(false), 2000);
   };
 
+  const getGmailUrl = (name: string, email: string, message: string) => {
+    const subject = encodeURIComponent(`Portfolio Inquiry from ${name || 'Prospective Collaborator'}`);
+    const body = encodeURIComponent(`${message}\n\n---\nFrom: ${name} (${email})`);
+    return `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(recipientEmail)}&su=${subject}&body=${body}`;
+  };
+
+  const getMailtoUrl = (name: string, email: string, message: string) => {
+    const subject = encodeURIComponent(`Portfolio Inquiry from ${name || 'Prospective Collaborator'}`);
+    const body = encodeURIComponent(`${message}\n\n---\nFrom: ${name} (${email})`);
+    return `mailto:${recipientEmail}?subject=${subject}&body=${body}`;
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formState.name || !formState.email || !formState.message) return;
 
     setStatus('submitting');
     setErrorMessage('');
+    setSubmittedData({ ...formState });
 
     try {
       let delivered = false;
+      let needsActivation = false;
 
-      // 1. First attempt: Next.js API route
+      // 1. First attempt: Next.js API route with 5s timeout
       try {
+        const controller = new AbortController();
+        const timeout = setTimeout(() => controller.abort(), 5000);
+
         const response = await fetch('/api/contact', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -59,47 +77,72 @@ export default function ContactFooter() {
             email: formState.email,
             message: formState.message,
           }),
+          signal: controller.signal,
         });
 
-        const result = await response.json();
-        if (response.ok && result.success) {
+        clearTimeout(timeout);
+        const result = await response.json().catch(() => null);
+
+        if (response.ok && result?.success) {
           delivered = true;
+        } else if (result?.needsActivation) {
+          needsActivation = true;
         }
       } catch (e) {
         // Fall back to direct client delivery
       }
 
-      // 2. Client-side direct submission fallback (works directly in the browser)
-      if (!delivered) {
-        const clientRes = await fetch(
-          `https://formsubmit.co/ajax/${encodeURIComponent(recipientEmail)}`,
-          {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              Accept: 'application/json',
-            },
-            body: JSON.stringify({
-              name: formState.name,
-              email: formState.email,
-              message: formState.message,
-              _subject: `New Portfolio Message from ${formState.name}`,
-              _replyto: formState.email,
-              _template: 'table',
-            }),
-          }
-        );
+      // 2. Client-side direct submission fallback (works on static hosting and client networks)
+      if (!delivered && !needsActivation) {
+        try {
+          const controller = new AbortController();
+          const timeout = setTimeout(() => controller.abort(), 6000);
 
-        if (clientRes.ok) {
-          delivered = true;
+          const formSubmitTarget =
+            process.env.NEXT_PUBLIC_FORMSUBMIT_TOKEN ||
+            '35f64caaf118e92fb20df029da68b82b';
+
+          const clientRes = await fetch(
+            `https://formsubmit.co/ajax/${formSubmitTarget}`,
+            {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                Accept: 'application/json',
+              },
+              body: JSON.stringify({
+                name: formState.name,
+                email: formState.email,
+                message: formState.message,
+                _subject: `New Portfolio Message from ${formState.name} (${formState.email})`,
+                _replyto: formState.email,
+                _captcha: 'false',
+                _template: 'table',
+              }),
+              signal: controller.signal,
+            }
+          );
+
+          clearTimeout(timeout);
+          const data = await clientRes.json().catch(() => null);
+
+          if (data && (data.success === 'true' || data.success === true)) {
+            delivered = true;
+          } else if (data?.message && typeof data.message === 'string' && data.message.toLowerCase().includes('activation')) {
+            needsActivation = true;
+          }
+        } catch (err) {
+          // Both automated attempts failed
         }
       }
 
       if (delivered) {
         setStatus('success');
         setFormState({ name: '', email: '', message: '' });
+      } else if (needsActivation) {
+        setStatus('activation_needed');
       } else {
-        throw new Error('Unable to dispatch email automatically');
+        throw new Error('Automated network dispatch unavailable. Click below to send directly via Gmail or Mail app.');
       }
     } catch (err: any) {
       console.error('Contact form submission error:', err);
@@ -127,8 +170,8 @@ export default function ContactFooter() {
                 </p>
               </div>
 
-              <h2 className="font-display italic font-extrabold text-3xl sm:text-5xl md:text-6xl text-bone uppercase tracking-tight leading-[0.96] mb-6">
-                Let&apos;s build something <span className="font-display font-medium not-italic text-coral uppercase">useful</span>.
+              <h2 className="font-display font-black text-3xl sm:text-5xl md:text-6xl text-bone uppercase tracking-tight leading-[0.96] mb-6">
+                Let&apos;s build something <span className="text-coral">useful</span>.
               </h2>
 
               <p className="font-body text-sm sm:text-base md:text-lg text-bone/75 max-w-lg mb-8 leading-relaxed">
@@ -191,23 +234,65 @@ export default function ContactFooter() {
 
           {/* Right Column: Working Contact Form (6 cols) */}
           <div className="lg:col-span-6 bg-ink-surface rounded-3xl p-6 sm:p-8 lg:p-10 border border-white/10 shadow-xl">
-            <h3 className="font-display italic font-bold text-xl sm:text-2xl text-bone uppercase tracking-tight mb-1.5">
+            <h3 className="font-display font-bold text-xl sm:text-2xl text-bone uppercase tracking-tight mb-1.5">
               Send a Message
             </h3>
             
             {status === 'success' ? (
-              <div className="p-6 rounded-2xl bg-white/5 border border-tealAccent text-center space-y-3">
-                <CheckCircle2 className="w-10 h-10 text-tealAccent mx-auto" />
-                <h4 className="font-display italic font-bold text-lg text-bone">Message Delivered</h4>
-                <p className="font-body text-xs sm:text-sm text-bone/85">
-                  Your message has been sent to me. I will get back to you shortly.
+              <div className="p-6 sm:p-8 rounded-2xl bg-white/5 border border-tealAccent text-center space-y-4">
+                <CheckCircle2 className="w-12 h-12 text-tealAccent mx-auto" />
+                <h4 className="font-display font-bold text-xl text-bone">Message Delivered!</h4>
+                <p className="font-body text-xs sm:text-sm text-bone/85 leading-relaxed max-w-sm mx-auto">
+                  Thank you! Your inquiry was dispatched directly to <span className="font-mono text-coral font-bold">{recipientEmail}</span>. I will review it and reply shortly.
                 </p>
-                <button
-                  onClick={() => setStatus('idle')}
-                  className="mt-3 px-4 py-2 rounded-full text-xs font-mono bg-white/10 hover:bg-white/20 text-bone transition-colors"
-                >
-                  Send another message
-                </button>
+                <div className="pt-2">
+                  <button
+                    onClick={() => setStatus('idle')}
+                    className="px-5 py-2.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-white/10 hover:bg-white/20 text-bone transition-colors"
+                  >
+                    Send another message
+                  </button>
+                </div>
+              </div>
+            ) : status === 'activation_needed' ? (
+              <div className="p-6 sm:p-8 rounded-2xl bg-white/5 border border-coral/40 text-center space-y-4">
+                <div className="w-12 h-12 rounded-full bg-coral/20 text-coral flex items-center justify-center mx-auto">
+                  <Mail className="w-6 h-6" />
+                </div>
+                <h4 className="font-display font-bold text-xl text-bone">One-Time Activation Required</h4>
+                <p className="font-body text-xs sm:text-sm text-bone/85 leading-relaxed max-w-md mx-auto">
+                  FormSubmit sent a one-time <strong className="text-coral">&quot;Activate Form&quot;</strong> link to <span className="font-mono text-coral">{recipientEmail}</span>. Please click the link in your inbox to enable automated routing.
+                </p>
+                <p className="font-body text-xs text-bone/60">
+                  To deliver your message immediately right now, click either option below:
+                </p>
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
+                  <a
+                    href={getGmailUrl(submittedData.name, submittedData.email, submittedData.message)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-coral text-white font-mono text-xs font-bold uppercase tracking-wider hover:bg-coral-hover transition-colors shadow-md"
+                  >
+                    <span>Send via Gmail Web</span>
+                    <ExternalLink className="w-3.5 h-3.5" />
+                  </a>
+
+                  <a
+                    href={getMailtoUrl(submittedData.name, submittedData.email, submittedData.message)}
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-bone font-mono text-xs font-bold uppercase tracking-wider transition-colors"
+                  >
+                    <span>Default Mail App</span>
+                    <ExternalLink className="w-3.5 h-3.5" />
+                  </a>
+                </div>
+                <div className="pt-2">
+                  <button
+                    onClick={() => setStatus('idle')}
+                    className="text-xs font-mono text-bone/50 hover:text-coral transition-colors"
+                  >
+                    ← Edit or rewrite message
+                  </button>
+                </div>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4">
@@ -257,17 +342,28 @@ export default function ContactFooter() {
                 </div>
 
                 {status === 'error' && (
-                  <div className="p-3.5 rounded-xl bg-coral/10 border border-coral/30 space-y-2">
-                    <p className="text-xs font-mono text-coral">
-                      Could not dispatch automatically. Click below to open your email directly:
+                  <div className="p-4 rounded-xl bg-coral/10 border border-coral/30 space-y-3">
+                    <p className="text-xs font-mono text-coral font-medium">
+                      Network dispatch did not complete. Click below to deliver directly to {recipientEmail}:
                     </p>
-                    <a
-                      href={`mailto:${recipientEmail}?subject=${encodeURIComponent('Portfolio Inquiry: ' + formState.name)}&body=${encodeURIComponent(formState.message + '\n\nFrom: ' + formState.name + ' (' + formState.email + ')')}`}
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-coral text-white text-xs font-mono font-bold"
-                    >
-                      <span>Send via Email Client</span>
-                      <ExternalLink className="w-3.5 h-3.5" />
-                    </a>
+                    <div className="flex flex-wrap gap-2.5">
+                      <a
+                        href={getGmailUrl(formState.name, formState.email, formState.message)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-coral text-white text-xs font-mono font-bold shadow-sm"
+                      >
+                        <span>Open in Gmail</span>
+                        <ExternalLink className="w-3.5 h-3.5" />
+                      </a>
+                      <a
+                        href={getMailtoUrl(formState.name, formState.email, formState.message)}
+                        className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-white/10 hover:bg-white/20 text-bone text-xs font-mono font-bold"
+                      >
+                        <span>Mail Client</span>
+                        <ExternalLink className="w-3.5 h-3.5" />
+                      </a>
+                    </div>
                   </div>
                 )}
 

@@ -15,7 +15,6 @@ export const skillCategories = [
       { name: "React", note: "Component architectures, state systems" },
       { name: "TypeScript", note: "Strict types, interface definitions" },
       { name: "Tailwind CSS", note: "Utility-first design tokens & responsive systems" },
-      { name: "Material 3", note: "Adaptive component theming, mobile-first design" },
     ]
   },
   {
@@ -60,6 +59,8 @@ export const skillCategories = [
 export const marqueeTools = [
   "Next.js",
   "React",
+  "JavaScript",
+  "NativewindCSS",
   "React Native",
   "TypeScript",
   "Tailwind CSS",
@@ -67,7 +68,6 @@ export const marqueeTools = [
   "Supabase",
   "Node.js",
   "AI Agents",
-  "Material 3",
-  "WhatsApp Cloud API",
-  "Paystack",
+  /*"WhatsApp Cloud API",
+  "Paystack",*/
 ];

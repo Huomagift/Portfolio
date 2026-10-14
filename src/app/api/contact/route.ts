@@ -19,48 +19,88 @@ export async function POST(request: Request) {
     // 1. If custom Formspree endpoint is configured, forward to Formspree
     const customEndpoint = process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT;
     if (customEndpoint && customEndpoint.trim() !== '') {
-      const response = await fetch(customEndpoint, {
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 6000);
+
+      try {
+        const response = await fetch(customEndpoint, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+          },
+          body: JSON.stringify({ name, email, message }),
+          signal: controller.signal,
+        });
+
+        clearTimeout(timeout);
+        if (response.ok) {
+          return NextResponse.json({ success: true, message: 'Delivered via Formspree.' });
+        }
+      } catch (err) {
+        clearTimeout(timeout);
+        // Continue to fallback
+      }
+    }
+
+    // 2. Default: Dispatch directly via FormSubmit with AbortController timeout
+    const formSubmitTarget =
+      process.env.FORMSUBMIT_TOKEN ||
+      process.env.NEXT_PUBLIC_FORMSUBMIT_TOKEN ||
+      '35f64caaf118e92fb20df029da68b82b';
+
+    const formSubmitUrl = `https://formsubmit.co/ajax/${formSubmitTarget}`;
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 6000);
+
+    try {
+      const response = await fetch(formSubmitUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           Accept: 'application/json',
+          Origin: 'https://huomagift.github.io',
+          Referer: 'https://huomagift.github.io/Portfolio/',
         },
-        body: JSON.stringify({ name, email, message }),
+        body: JSON.stringify({
+          name,
+          email,
+          message,
+          _subject: `New Portfolio Message from ${name} (${email})`,
+          _replyto: email,
+          _captcha: 'false',
+          _template: 'table',
+        }),
+        signal: controller.signal,
       });
 
-      if (response.ok) {
-        return NextResponse.json({ success: true });
+      clearTimeout(timeout);
+      const data = await response.json().catch(() => null);
+
+      const isSuccess = data && (data.success === true || data.success === 'true');
+      const needsActivation = data?.message && typeof data.message === 'string' && data.message.toLowerCase().includes('activation');
+
+      if (isSuccess) {
+        return NextResponse.json({ success: true, message: 'Email delivered successfully.' });
       }
-    }
 
-    // 2. Default: Send directly to recipient email via FormSubmit.co service
-    // Sends clean HTML email directly to recipientEmail with zero configuration needed
-    const formSubmitUrl = `https://formsubmit.co/ajax/${encodeURIComponent(recipientEmail)}`;
+      if (needsActivation) {
+        return NextResponse.json({
+          success: false,
+          needsActivation: true,
+          message: data.message,
+        });
+      }
 
-    const response = await fetch(formSubmitUrl, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-      },
-      body: JSON.stringify({
-        name,
-        email,
-        message,
-        _subject: `New Portfolio Message from ${name}`,
-        _replyto: email,
-        _template: 'table',
-      }),
-    });
-
-    const data = await response.json();
-
-    if (response.ok) {
-      return NextResponse.json({ success: true, data });
-    } else {
       return NextResponse.json(
-        { error: data.message || 'Failed to deliver email' },
+        { error: data?.message || 'Failed to dispatch email' },
         { status: 500 }
+      );
+    } catch (fetchError: any) {
+      clearTimeout(timeout);
+      return NextResponse.json(
+        { error: fetchError?.name === 'AbortError' ? 'Request timed out' : fetchError?.message || 'Network dispatch issue' },
+        { status: 504 }
       );
     }
   } catch (error: any) {
@@ -71,3 +111,4 @@ export async function POST(request: Request) {
     );
   }
 }
+

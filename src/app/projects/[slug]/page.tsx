@@ -80,7 +80,7 @@ export default function ProjectDetailPage({ params }: Props) {
             )}
           </div>
 
-          <h1 className="font-display italic font-extrabold text-3xl sm:text-5xl md:text-6xl uppercase tracking-tight text-bone mb-6 leading-[1]">
+          <h1 className="font-display font-black text-3xl sm:text-5xl md:text-6xl uppercase tracking-tight text-bone mb-6 leading-[1.05]">
             {project.title}
           </h1>
 
@@ -94,14 +94,14 @@ export default function ProjectDetailPage({ params }: Props) {
           </div>
         </header>
 
-        {/* Hero Architectural Preview Area (Zero Gradients, Flat Surface) */}
+        {/* Hero Architectural Preview Area (Zero Gradients, Edge-to-Edge Fit) */}
         <div className="relative aspect-[16/10] sm:aspect-[16/9] w-full rounded-3xl overflow-hidden bg-ink-surface border border-white/15 mb-12 sm:mb-16 shadow-xl">
           <Image
             src={project.image}
             alt={project.imageAlt}
             fill
             priority
-            className="object-contain p-3 sm:p-6"
+            className="object-cover object-top"
             sizes="(max-width: 1024px) 100vw, 960px"
           />
         </div>
@@ -157,7 +157,7 @@ export default function ProjectDetailPage({ params }: Props) {
           
           {/* Problem Statement */}
           <section className="border-t border-white/10 pt-8 sm:pt-10">
-            <h2 className="font-display italic font-extrabold text-2xl sm:text-3xl uppercase tracking-tight text-bone mb-4">
+            <h2 className="font-display font-black text-2xl sm:text-3xl uppercase tracking-tight text-bone mb-4">
               The Problem
             </h2>
             <p className="font-body text-sm sm:text-base md:text-lg text-bone/80 leading-relaxed max-w-3xl">
@@ -167,7 +167,7 @@ export default function ProjectDetailPage({ params }: Props) {
 
           {/* What I Built */}
           <section className="border-t border-white/10 pt-8 sm:pt-10">
-            <h2 className="font-display italic font-extrabold text-2xl sm:text-3xl uppercase tracking-tight text-bone mb-4">
+            <h2 className="font-display font-black text-2xl sm:text-3xl uppercase tracking-tight text-bone mb-4">
               What I Built
             </h2>
             <p className="font-body text-sm sm:text-base md:text-lg text-bone/80 leading-relaxed max-w-3xl">
@@ -178,7 +178,7 @@ export default function ProjectDetailPage({ params }: Props) {
           {/* Key Decisions (Only if provided) */}
           {project.keyDecisions && project.keyDecisions.length > 0 && (
             <section className="border-t border-white/10 pt-8 sm:pt-10">
-              <h2 className="font-display italic font-extrabold text-2xl sm:text-3xl uppercase tracking-tight text-bone mb-6">
+              <h2 className="font-display font-black text-2xl sm:text-3xl uppercase tracking-tight text-bone mb-6">
                 Key Technical &amp; Product Decisions
               </h2>
               <div className="grid grid-cols-1 gap-3.5 sm:gap-4">
@@ -201,7 +201,7 @@ export default function ProjectDetailPage({ params }: Props) {
 
           {/* Links Block */}
           <section className="border-t border-white/10 pt-8 sm:pt-10">
-            <h2 className="font-display italic font-extrabold text-xl uppercase tracking-tight text-bone mb-4">
+            <h2 className="font-display font-black text-xl uppercase tracking-tight text-bone mb-4">
               Project Links
             </h2>
             <ProjectLinks links={project.links} />
@@ -218,7 +218,7 @@ export default function ProjectDetailPage({ params }: Props) {
             <ArrowLeft className="w-5 h-5 text-coral transition-transform group-hover:-translate-x-1" />
             <div>
               <span className="font-mono text-[10px] text-bone/40 uppercase block">Previous Project</span>
-              <span className="font-display italic font-bold text-sm sm:text-base text-bone group-hover:text-coral transition-colors">
+              <span className="font-display font-bold text-sm sm:text-base text-bone group-hover:text-coral transition-colors">
                 {prev.title}
               </span>
             </div>
@@ -230,7 +230,7 @@ export default function ProjectDetailPage({ params }: Props) {
           >
             <div>
               <span className="font-mono text-[10px] text-bone/40 uppercase block">Next Project</span>
-              <span className="font-display italic font-bold text-sm sm:text-base text-bone group-hover:text-coral transition-colors">
+              <span className="font-display font-bold text-sm sm:text-base text-bone group-hover:text-coral transition-colors">
                 {next.title}
               </span>
             </div>

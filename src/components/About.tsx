@@ -17,8 +17,8 @@ export default function About() {
               Background &amp; Milestones
             </p>
           </div>
-          <h2 className="font-display italic font-extrabold text-3xl sm:text-5xl md:text-6xl text-ink uppercase tracking-tight leading-[1.02]">
-            Code, Hackathons, and <span className="font-display font-medium not-italic text-coral uppercase">shipping</span>.
+          <h2 className="font-display font-black text-3xl sm:text-5xl md:text-6xl text-ink uppercase tracking-tight leading-[1.02]">
+            Code, Hackathons, and <span className="text-coral">shipping</span>.
           </h2>
         </div>
 
@@ -27,7 +27,7 @@ export default function About() {
           
           {/* Main Copy (7 cols) */}
           <div className="lg:col-span-7 space-y-5 text-sm sm:text-base md:text-lg text-ink/85 font-body leading-relaxed">
-            <p className="font-display italic font-bold text-lg sm:text-xl md:text-2xl text-ink uppercase tracking-tight">
+            <p className="font-display font-bold text-lg sm:text-xl md:text-2xl text-ink uppercase tracking-tight">
               I build AI products that solve problems, and I ship them.
             </p>
             <p>
@@ -45,7 +45,7 @@ export default function About() {
           <div className="lg:col-span-5 bg-bone-darker rounded-3xl p-6 sm:p-8 border border-ink/10 shadow-sm">
             <div className="flex items-center gap-2 mb-5">
               <Users className="w-5 h-5 text-coral" />
-              <h3 className="font-display italic font-bold text-lg sm:text-xl uppercase tracking-tight text-ink">
+              <h3 className="font-display font-bold text-lg sm:text-xl uppercase tracking-tight text-ink">
                 Community &amp; Leadership
               </h3>
             </div>
@@ -54,7 +54,7 @@ export default function About() {
               {profile.leadership.map((item, idx) => (
                 <div key={idx} className="pb-3 border-b border-ink/10 last:border-none last:pb-0">
                   <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 mb-1">
-                    <h4 className="font-display italic font-bold text-sm sm:text-base text-ink">{item.role}</h4>
+                    <h4 className="font-display font-bold text-sm sm:text-base text-ink">{item.role}</h4>
                     <span className="font-mono text-xs text-coral font-bold">{item.organization}</span>
                   </div>
                   <p className="font-body text-xs sm:text-sm text-ink/75 leading-relaxed">
@@ -71,7 +71,7 @@ export default function About() {
         <div>
           <div className="flex items-center gap-2 mb-6">
             <Trophy className="w-5 h-5 text-coral" />
-            <h3 className="font-display italic font-bold text-xl sm:text-2xl uppercase tracking-tight text-ink">
+            <h3 className="font-display font-bold text-xl sm:text-2xl uppercase tracking-tight text-ink">
               Milestones Strip
             </h3>
           </div>
@@ -97,7 +97,7 @@ export default function About() {
                       </span>
                     )}
                   </div>
-                  <h4 className="font-display italic font-bold text-base sm:text-lg text-ink mb-1.5">
+                  <h4 className="font-display font-bold text-base sm:text-lg text-ink mb-1.5">
                     {m.title}
                   </h4>
                   <p className="font-body text-xs sm:text-sm text-ink/70 leading-relaxed">
