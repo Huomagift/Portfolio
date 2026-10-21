@@ -115,7 +115,7 @@ export const projects: Project[] = [
     status: "Shipped & Live",
     badges: ["Live Client Site"],
     links: [
-      { type: "Live", url: "https://www.artzaworld.com", label: "artzaworld.com" },
+      { type: "Live", url: "https://artza.vercel.app", label: "artzaworld.com" },
       { type: "GitHub", url: "https://github.com/Huomagift/artza", label: "GitHub" },
       ],
     image: "/projects/artza.jpg",
